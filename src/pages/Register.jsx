@@ -33,10 +33,8 @@ function Register() {
   return (
     <div className="container">
       <div className="content form-content">
-        <h2>Create your PopX account</h2>
-        <p className="subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
+        <h2 className="register-header">Create your<br/>PopX account</h2>
+       
         
         <form onSubmit={handleSubmit} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           <div className="form-group">

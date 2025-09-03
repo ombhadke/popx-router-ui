@@ -1,60 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [isFormFilled, setIsFormFilled] = useState(false);
 
-  const handleLogin = (e) => {
+  useEffect(() => {
+    // Check if both email and password have values
+    setIsFormFilled(
+      formData.email.trim() !== "" && formData.password.trim() !== ""
+    );
+  }, [formData]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/profile");
   };
 
-  const isFormValid = email.trim() !== "" && password.trim() !== "";
-
   return (
     <div className="container">
-      <div className="content form-content">
-        <h2>Signin to your PopX account</h2>
-        <p className="subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
-        
-        <form onSubmit={handleLogin} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="content">
+        <div className="login-header">
+          <h1>Signin to your 
+            <br/>
+            PopX account</h1>
+          <p className="subtitle">
+            Lorem ipsum dolor sit amet,
+            <br />
+            consectetur adipiscing elit.
+          </p>
+          <br/>
+        </div>
+        <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Email Address</label>
-            <input 
-              type="email" 
+            <input
+              type="email"
               className="form-input"
               placeholder="Enter email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required 
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
           </div>
-          
           <div className="form-group">
             <label className="form-label">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               className="form-input"
               placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required 
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
             />
           </div>
-          
-          <div style={{ marginTop: 'auto', paddingTop: '40px' }}>
-            <button 
-              type="submit" 
-              className={`btn-primary ${!isFormValid ? 'btn-disabled' : ''}`}
-              disabled={!isFormValid}
-            >
-              Login
-            </button>
-          </div>
+          <button
+            type="submit"
+            className={`btn-primary ${!isFormFilled ? "btn-inactive" : ""}`}
+            disabled={!isFormFilled}
+          >
+            Login
+          </button>
         </form>
       </div>
     </div>

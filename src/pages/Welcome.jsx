@@ -1,20 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Welcome() {
   const navigate = useNavigate();
 
   return (
     <div className="container">
-      <div className="content welcome-content">
+      <div className="welcome-content">
         <h1>Welcome to PopX</h1>
         <p className="subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Lorem ipsum dolor sit amet,<br />
+          consectetur adipiscing elit,
         </p>
-        <div style={{ marginTop: 'auto' }}>
-          <button className="btn-primary" onClick={() => navigate("/register")}>
+        <div className="button-container">
+          <button className="btn-primary" onClick={() => navigate('/register')}>
             Create Account
           </button>
-          <button className="btn-secondary" onClick={() => navigate("/login")}>
+          <button className="btn-secondary" onClick={() => navigate('/login')}>
             Already Registered? Login
           </button>
         </div>
